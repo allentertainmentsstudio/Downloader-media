@@ -68,13 +68,15 @@ async def callback(client, query: CallbackQuery):
         await query.message.edit("❌ Download failed")
 
 # ---------------- RUN BOTH ---------------- #
+def run_bot():
+    # Create asyncio loop for this thread
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    bot.run()  # run Pyrogram bot in this thread
+
 if __name__ == "__main__":
-    # Start Flask server in background
-    threading.Thread(target=run_flask, daemon=True).start()
+    # Start Pyrogram bot in a background thread with its own loop
+    threading.Thread(target=run_bot, daemon=True).start()
 
-    # Fix asyncio loop issue (especially on Windows)
-    if os.name == "nt":
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
-    # Run Pyrogram bot in main thread
-    bot.run()
+    # Run Flask in main thread for Render port detection
+    run_flask()
