@@ -10,7 +10,6 @@ from buttons import quality_buttons
 from force_join import check_join
 
 # ---------------- FLASK SERVER ----------------
-
 app = Flask(__name__)
 
 @app.route("/")
@@ -22,7 +21,6 @@ def run_flask():
     app.run(host="0.0.0.0", port=port)
 
 # ---------------- PYROGRAM BOT ----------------
-
 bot = Client(
     "ultimate_downloader_bot",
     api_id=API_ID,
@@ -67,19 +65,14 @@ async def callback(client, query: CallbackQuery):
         await query.message.reply_video(file)
         os.remove(file)
         await query.message.delete()
-    except Exception as e:
+    except Exception:
         await query.message.edit("❌ Download failed")
 
 # ---------------- RUN BOT ----------------
-
 def run_bot():
-    # Use asyncio.run() to create event loop safely in any thread
-    asyncio.run(bot.start())
+    asyncio.run(bot.start())  # Async safe
 
 # ---------------- START BOTH ----------------
-
 if __name__ == "__main__":
-    # Telegram bot runs in separate thread
-    threading.Thread(target=run_bot).start()
-    # Flask runs in main thread
-    run_flask()
+    threading.Thread(target=run_bot).start()  # Run bot in background
+    run_flask()  # Flask server in main thread
