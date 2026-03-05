@@ -9,25 +9,25 @@ from downloader import download_video
 from buttons import quality_buttons
 from force_join import check_join
 
----------------- FLASK SERVER ----------------
+# ---------------- FLASK SERVER ----------------
 
-app = Flask(name)
+app = Flask(__name__)
 
 @app.route("/")
 def home():
-return "Bot is running!"
+    return "Bot is running!"
 
 def run_flask():
-port = int(os.environ.get("PORT", 10000))
-app.run(host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
 
----------------- PYROGRAM BOT ----------------
+# ---------------- PYROGRAM BOT ----------------
 
 bot = Client(
-"ultimate_downloader_bot",
-api_id=API_ID,
-api_hash=API_HASH,
-bot_token=BOT_TOKEN
+    "ultimate_downloader_bot",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN
 )
 
 START_TEXT = """👋 Hello
@@ -44,41 +44,41 @@ TeraBox
 
 @bot.on_message(filters.command("start"))
 async def start(client, message):
-if not await check_join(client, message):
-return
-await message.reply_text(START_TEXT)
+    if not await check_join(client, message):
+        return
+    await message.reply_text(START_TEXT)
 
 @bot.on_message(filters.text & ~filters.command)
 async def link_handler(client, message):
-if not await check_join(client, message):
-return
-url = message.text
-await message.reply_text(
-"🎬 Select Quality",
-reply_markup=quality_buttons(url)
-)
+    if not await check_join(client, message):
+        return
+    url = message.text
+    await message.reply_text(
+        "🎬 Select Quality",
+        reply_markup=quality_buttons(url)
+    )
 
 @bot.on_callback_query()
 async def callback(client, query: CallbackQuery):
-quality, url = query.data.split("|")
-await query.message.edit("⏳ Downloading...")
-try:
-file = download_video(url, quality)
-await query.message.reply_video(file)
-os.remove(file)
-await query.message.delete()
-except:
-await query.message.edit("❌ Download failed")
+    quality, url = query.data.split("|")
+    await query.message.edit("⏳ Downloading...")
+    try:
+        file = download_video(url, quality)
+        await query.message.reply_video(file)
+        os.remove(file)
+        await query.message.delete()
+    except Exception as e:
+        await query.message.edit("❌ Download failed")
 
----------------- RUN BOT ----------------
+# ---------------- RUN BOT ----------------
 
 def run_bot():
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
-bot.run()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    bot.run()
 
----------------- START BOTH ----------------
+# ---------------- START BOTH ----------------
 
-if name == "main":
-threading.Thread(target=run_bot).start()  # Telegram bot thread
-run_flask()  # Flask main thread (Render port detect karega)
+if __name__ == "__main__":
+    threading.Thread(target=run_bot).start()
+    run_flask()
