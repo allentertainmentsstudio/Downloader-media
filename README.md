@@ -69,7 +69,7 @@ FORCE_CHANNEL=MyTelegramChannel
 
 1. Clone the repository
 
-git clone https://github.com/yourusername/ultimate-downloader-bot
+git clone https://github.com/allentertainmentsstudio/Downloader-media.git
 
 2. Go to project folder
 
