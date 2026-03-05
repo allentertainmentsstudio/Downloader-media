@@ -8,18 +8,6 @@ from downloader import download_video
 from buttons import quality_buttons
 from force_join import check_join
 
-# ---------------- FLASK SERVER ---------------- #
-
-flask_app = Flask(__name__)
-
-@flask_app.route('/')
-def home():
-    return "Bot is running!"
-
-def run_flask():
-    port = int(os.environ.get("PORT", 5000))
-    flask_app.run(host="0.0.0.0", port=port)
-
 # ---------------- PYROGRAM BOT ---------------- #
 
 app = Client(
@@ -86,8 +74,24 @@ async def callback(client, query: CallbackQuery):
         await query.message.edit("❌ Download failed")
 
 
-# ---------------- RUN BOTH ---------------- #
+# ---------------- FLASK SERVER ---------------- #
+
+flask_app = Flask(__name__)
+
+@flask_app.route("/")
+def home():
+    return "Bot is running!"
+
+
+def run_bot():
+    app.run()
+
 
 if __name__ == "__main__":
-    threading.Thread(target=run_flask).start()
-    app.run()
+
+    # Run Telegram bot in background
+    threading.Thread(target=run_bot).start()
+
+    # Run Flask server for Render
+    port = int(os.environ.get("PORT", 10000))
+    flask_app.run(host="0.0.0.0", port=port)
