@@ -1,10 +1,26 @@
 import os
+import threading
+from flask import Flask
 from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery
 from config import API_ID, API_HASH, BOT_TOKEN
 from downloader import download_video
 from buttons import quality_buttons
 from force_join import check_join
+
+# ---------------- FLASK SERVER ---------------- #
+
+flask_app = Flask(__name__)
+
+@flask_app.route('/')
+def home():
+    return "Bot is running!"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 5000))
+    flask_app.run(host="0.0.0.0", port=port)
+
+# ---------------- PYROGRAM BOT ---------------- #
 
 app = Client(
     "ultimate_downloader_bot",
@@ -26,7 +42,6 @@ Facebook
 Pinterest
 TeraBox
 """
-
 
 @app.on_message(filters.command("start"))
 async def start(client, message):
@@ -59,7 +74,6 @@ async def callback(client, query: CallbackQuery):
     await query.message.edit("⏳ Downloading...")
 
     try:
-
         file = download_video(url, quality)
 
         await query.message.reply_video(file)
@@ -72,4 +86,8 @@ async def callback(client, query: CallbackQuery):
         await query.message.edit("❌ Download failed")
 
 
-app.run()
+# ---------------- RUN BOTH ---------------- #
+
+if __name__ == "__main__":
+    threading.Thread(target=run_flask).start()
+    app.run()
