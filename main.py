@@ -1,5 +1,6 @@
 import os
 import threading
+import asyncio
 from flask import Flask
 from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery
@@ -7,6 +8,17 @@ from config import API_ID, API_HASH, BOT_TOKEN
 from downloader import download_video
 from buttons import quality_buttons
 from force_join import check_join
+
+# ---------------- FLASK SERVER ---------------- #
+flask_app = Flask(__name__)
+
+@flask_app.route("/")
+def home():
+    return "Bot is running!"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 5000))
+    flask_app.run(host="0.0.0.0", port=port)
 
 # ---------------- PYROGRAM BOT ---------------- #
 bot = Client(
@@ -55,20 +67,14 @@ async def callback(client, query: CallbackQuery):
     except:
         await query.message.edit("❌ Download failed")
 
-# ---------------- FLASK SERVER ---------------- #
-flask_app = Flask(__name__)
-
-@flask_app.route("/")
-def home():
-    return "Bot is running!"
-
-def run_bot():
-    bot.run()  # run Pyrogram bot in background
-
+# ---------------- RUN BOTH ---------------- #
 if __name__ == "__main__":
-    # Start bot in background thread
-    threading.Thread(target=run_bot, daemon=True).start()
+    # Start Flask server in background
+    threading.Thread(target=run_flask, daemon=True).start()
 
-    # Run Flask server on Render port
-    port = int(os.environ.get("PORT", 5000))  # <-- Must use Render PORT
-    flask_app.run(host="0.0.0.0", port=port)
+    # Fix asyncio loop issue (especially on Windows)
+    if os.name == "nt":
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+    # Run Pyrogram bot in main thread
+    bot.run()
