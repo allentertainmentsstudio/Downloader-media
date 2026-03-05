@@ -1,12 +1,12 @@
-🚀 Ultimate Telegram Downloader Bot
+# 🚀 Ultimate Telegram Downloader Bot
 
-A powerful Telegram bot built with Python + Pyrogram that can download videos from multiple websites and send them directly to Telegram.
+A powerful **Telegram Downloader Bot** built with **Python + Pyrogram** that can download videos and media from multiple platforms and send them directly to Telegram.
 
 ---
 
-📥 Supported Platforms
+# 📥 Supported Platforms
 
-This bot can download videos from:
+This bot can download media from:
 
 - YouTube
 - Instagram
@@ -16,111 +16,132 @@ This bot can download videos from:
 - Twitter / X
 - TeraBox (basic support)
 
-Powered by yt-dlp, which supports 1000+ websites.
+Powered by **yt-dlp**, which supports **1000+ websites**.
 
 ---
 
-✨ Features
+# ✨ Features
 
 - 🎬 Video Quality Selection (360p / 720p / 1080p)
-- 📥 Fast Video Downloader
+- ⚡ Fast Download Speed
+- 📥 Direct Upload to Telegram
 - 🔐 Force Join Channel System
 - 📁 Auto Delete Downloaded Files
-- ⚡ Simple and Fast
-- 📦 Up to 2GB File Upload Support
 - 🧩 Modular Code Structure
+- 📦 Up to 2GB File Upload Support
 
 ---
 
-📂 Project Structure
+# 📂 Project Structure
 
+```
 Downloader-media
 │
 ├── main.py
 ├── config.py
 ├── downloader.py
-├── terabox.py
-├── buttons.py
-├── force_join.py
+├── handlers.py
 ├── requirements.txt
-└── Dockerfile
+├── Dockerfile
+└── README.md
+```
 
 ---
 
-⚙️ Environment Variables
+# ⚙️ Environment Variables
 
-Set the following environment variables before running the bot.
+Create a `.env` file or add these variables in your hosting platform.
 
+```
 API_ID=
 API_HASH=
 BOT_TOKEN=
 FORCE_CHANNEL=
+```
 
-Example:
+### Example
 
-API_ID=12345678
-API_HASH=abcdef1234567890abcdef1234567890
-BOT_TOKEN=1234567890:ABCDefGhIjKlMnOpQrStUvWxYz
-FORCE_CHANNEL=MyTelegramChannel
+```
+API_ID=123456
+API_HASH=abcd1234abcd1234abcd1234abcd1234
+BOT_TOKEN=123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
+FORCE_CHANNEL=@yourchannel
+```
 
 ---
 
-🛠 Installation (Local)
+# 📦 Installation
 
-1️⃣ Clone the repository
+### Clone the repository
 
+```
 git clone https://github.com/allentertainmentsstudio/Downloader-media.git
+```
 
-2️⃣ Go to project folder
+### Go to the project folder
 
+```
 cd Downloader-media
+```
 
-3️⃣ Install requirements
+### Install requirements
 
+```
 pip install -r requirements.txt
+```
 
-4️⃣ Run the bot
+### Run the bot
 
+```
 python main.py
+```
 
 ---
 
-🐳 Deploy with Docker
+# 🐳 Docker Deployment
 
-Build image
+### Build Docker image
 
+```
 docker build -t downloader-bot .
+```
 
-Run container
+### Run container
 
-docker run downloader-bot
-
----
-
-☁ Deploy on Render
-
-1. Push this project to GitHub
-2. Go to Render
-3. Create a new Web Service
-4. Connect your GitHub repository
-5. Add Environment Variables
-6. Click Deploy 🚀
+```
+docker run -d downloader-bot
+```
 
 ---
 
-📜 Requirements
+# ☁️ Deploy on Render
 
-pyrogram
-tgcrypto
-yt-dlp
-requests
+1. Go to **Render**
+2. Click **New Web Service**
+3. Connect your **GitHub repository**
+4. Add **Environment Variables**
+5. Click **Deploy**
+
+Start Command:
+
+```
+python main.py
+```
 
 ---
 
-⚠️ Disclaimer
+# ⭐ Support
 
-This bot is intended for educational purposes only.
-Make sure you follow the terms of service of the platforms you download content from.
+If you like this project, give it a **star ⭐ on GitHub**.
+
+---
+
+# 👨‍💻 Developer
+
+Maintained by **Allen Entertainment Studio**
+
+GitHub:  
+https://github.com/allentertainmentsstudio
 
 ---
 
