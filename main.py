@@ -73,12 +73,13 @@ async def callback(client, query: CallbackQuery):
 # ---------------- RUN BOT ----------------
 
 def run_bot():
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    bot.run()
+    # Use asyncio.run() to create event loop safely in any thread
+    asyncio.run(bot.start())
 
 # ---------------- START BOTH ----------------
 
 if __name__ == "__main__":
+    # Telegram bot runs in separate thread
     threading.Thread(target=run_bot).start()
+    # Flask runs in main thread
     run_flask()
