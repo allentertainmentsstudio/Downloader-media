@@ -34,7 +34,7 @@ Powered by yt-dlp, which supports 1000+ websites.
 
 📂 Project Structure
 
-ultimate-downloader-bot
+Downloader-media
 │
 ├── main.py
 ├── config.py
@@ -67,19 +67,19 @@ FORCE_CHANNEL=MyTelegramChannel
 
 🛠 Installation (Local)
 
-1. Clone the repository
+1️⃣ Clone the repository
 
 git clone https://github.com/allentertainmentsstudio/Downloader-media.git
 
-2. Go to project folder
+2️⃣ Go to project folder
 
-cd ultimate-downloader-bot
+cd Downloader-media
 
-3. Install requirements
+3️⃣ Install requirements
 
 pip install -r requirements.txt
 
-4. Run the bot
+4️⃣ Run the bot
 
 python main.py
 
@@ -87,11 +87,11 @@ python main.py
 
 🐳 Deploy with Docker
 
-Build image:
+Build image
 
 docker build -t downloader-bot .
 
-Run container:
+Run container
 
 docker run downloader-bot
 
@@ -104,7 +104,7 @@ docker run downloader-bot
 3. Create a new Web Service
 4. Connect your GitHub repository
 5. Add Environment Variables
-6. Deploy 🚀
+6. Click Deploy 🚀
 
 ---
 
