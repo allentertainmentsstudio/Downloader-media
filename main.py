@@ -50,6 +50,7 @@ async def start(client, message):
 async def link_handler(client, message):
     if not await check_join(client, message):
         return
+
     url = message.text
     await message.reply_text(
         "🎬 Select Quality",
@@ -59,20 +60,35 @@ async def link_handler(client, message):
 @bot.on_callback_query()
 async def callback(client, query: CallbackQuery):
     quality, url = query.data.split("|")
+
     await query.message.edit("⏳ Downloading...")
+
     try:
         file = download_video(url, quality)
+
         await query.message.reply_video(file)
+
         os.remove(file)
+
         await query.message.delete()
-    except Exception:
+
+    except Exception as e:
         await query.message.edit("❌ Download failed")
+
 
 # ---------------- RUN BOT ----------------
 def run_bot():
-    asyncio.run(bot.start())  # Async safe
+
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+
+    bot.run()
+
 
 # ---------------- START BOTH ----------------
 if __name__ == "__main__":
-    threading.Thread(target=run_bot).start()  # Run bot in background
-    run_flask()  # Flask server in main thread
+
+    bot_thread = threading.Thread(target=run_bot)
+    bot_thread.start()
+
+    run_flask()
