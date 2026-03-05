@@ -1,5 +1,10 @@
 🚀 Ultimate Telegram Downloader Bot
 
+"Python" (https://img.shields.io/badge/Python-3.10+-blue.svg)
+"Pyrogram" (https://img.shields.io/badge/Library-Pyrogram-green)
+"License" (https://img.shields.io/badge/License-MIT-yellow)
+"Stars" (https://img.shields.io/github/stars/allentertainmentsstudio/Downloader-media?style=social)
+
 A powerful Telegram Downloader Bot built with Python + Pyrogram that can download videos and media from multiple platforms and send them directly to Telegram.
 
 ---
@@ -32,13 +37,25 @@ Powered by yt-dlp, which supports 1000+ websites.
 
 ---
 
+🤖 Telegram Bot
+
+You can create your bot using @BotFather.
+
+Start your bot like this:
+
+/start
+
+Then send any video link and the bot will download it.
+
+---
+
 📂 Project Structure
 
 Downloader-media
 │
 ├── main.py
 ├── config.py
-├── Handlers.py
+├── handlers.py
 ├── downloader.py
 ├── terabox.py
 ├── buttons.py
@@ -69,19 +86,19 @@ FORCE_CHANNEL=@yourchannel
 
 📦 Installation
 
-Clone the repository
+1️⃣ Clone the repository
 
 git clone https://github.com/allentertainmentsstudio/Downloader-media.git
 
-Go to the project folder
+2️⃣ Go to the project folder
 
 cd Downloader-media
 
-Install requirements
+3️⃣ Install requirements
 
 pip install -r requirements.txt
 
-Run the bot
+4️⃣ Run the bot
 
 python main.py
 
@@ -101,7 +118,7 @@ docker run -d downloader-bot
 
 ☁️ Deploy on Render
 
-1. Go to Render
+1. Go to https://render.com
 2. Click New Web Service
 3. Connect your GitHub repository
 4. Add Environment Variables
@@ -113,9 +130,25 @@ python main.py
 
 ---
 
+📜 Requirements
+
+pyrogram
+tgcrypto
+yt-dlp
+requests
+
+---
+
+⚠️ Disclaimer
+
+This bot is for educational purposes only.
+Make sure you follow the terms of service of the platforms you download content from.
+
+---
+
 ⭐ Support
 
-If you like this project, give it a star ⭐ on GitHub.
+If you like this project, please give it a star ⭐ on GitHub.
 
 ---
 
